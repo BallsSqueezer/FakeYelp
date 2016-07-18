@@ -37,8 +37,7 @@ class BusinessDetailViewController: UIViewController {
         
         //Configure map
         configureMapView()
-        
-        
+        zoomToRegion()
     }
 
     // MARK: - Helpers
@@ -56,48 +55,13 @@ class BusinessDetailViewController: UIViewController {
             mapView.showsTraffic = true
         }
         
-//        let geoCoder = CLGeocoder()
-//        geoCoder.geocodeAddressString("Shop B, G/F, 22-24A Tai Ping San Street SOHO, Sheung Wan, Hong Kong", completionHandler: { (placemarks, error) in
-//            if error != nil{
-//                print(error)
-//                return
-//            }
-//    
-//            if let placemarks = placemarks {
-//                let placemark = placemarks[0] //get first placemark from placemark array
-//    
-//                //Add annotation
-//                let annotation = MKPointAnnotation()
-//                annotation.title = self.business.name
-//                annotation.subtitle = self.business.categories
-//    
-//                if let location = placemark.location {
-//                    annotation.coordinate = location.coordinate
-//    
-//                    //Display the annotation
-//                    self.mapView.showAnnotations([annotation], animated: true)
-//                    self.mapView.selectAnnotation(annotation, animated: true)
-//                }
-//            }
-//        })
-        
-    
-        
-        //let initialLocation = business.coordinate //CLLocation(latitude: 37.785771, longitude: -122.406165)
-        //centerMapOnLocation(initialLocation)
         mapView.addAnnotation(business)
     }
     
-//    func initMapView(){
-//        // set initial location
-//        mapView.delegate = self
-//        let initialLocation = CLLocation(latitude: 37.785771, longitude: -122.406165)
-//        centerMapOnLocation(initialLocation)
-//    }
-    
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
+    func zoomToRegion(){
+        let location = business.coordinate
+        let region = MKCoordinateRegionMakeWithDistance(location, 5000, 7000)
+        mapView.setRegion(region, animated: true)
     }
     
 }
